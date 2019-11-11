@@ -61,13 +61,13 @@ import (
 var (
 	// Files that end up in the pristine*.zip archive.
 	pristineArchiveFiles = []string{
-		"COPYING",
+		"LICENSE.md",
 		executablePath("pristine"),
 	}
 
 	// Files that end up in the pristine-alltools*.zip archive.
 	allToolsArchiveFiles = []string{
-		"COPYING",
+		"LICENSE.md",
 		executablePath("pristine"),
 	}
 )
