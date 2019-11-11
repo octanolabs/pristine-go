@@ -10,10 +10,10 @@ fi
 # Create fake Go workspace if it doesn't exist yet.
 workspace="$PWD/build/_workspace"
 root="$PWD"
-octanodir="$workspace/src/github.com/octanolabs"
-if [ ! -L "$octanodir/pristine-go" ]; then
-    mkdir -p "$octanodir"
-    cd "$octanodir"
+wsorgdir="$workspace/src/github.com/octanolabs"
+if [ ! -L "$wsorgdir/pristine-go" ]; then
+    mkdir -p "$wsorgdir"
+    cd "$wsorgdir"
     ln -s ../../../../../. pristine-go
     cd "$root"
 fi
@@ -23,8 +23,8 @@ GOPATH="$workspace"
 export GOPATH
 
 # Run the command inside the workspace.
-cd "$octanodir/pristine-go"
-PWD="$octanodir/pristine-go"
+cd "$wsorgdir/pristine-go"
+PWD="$wsorgdir/pristine-go"
 
 # Launch the arguments with the configured environment.
 exec "$@"

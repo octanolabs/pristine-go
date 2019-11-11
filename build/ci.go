@@ -120,7 +120,7 @@ func doInstall(cmdline []string) {
 
 		if minor < 12 {
 			log.Println("You have Go version", runtime.Version())
-			log.Println("pristine-go requires at least Go version 1.12 and cannot")
+			log.Println("pristine requires at least Go version 1.12 and cannot")
 			log.Println("be compiled with an earlier version. Please upgrade your Go installation.")
 			os.Exit(1)
 		}
@@ -296,9 +296,9 @@ func doArchive(cmdline []string) {
 	var (
 		env = build.Env()
 
-		basePristine = archiveBasename(*arch, params.ArchiveVersion(env.Commit))
-		pristine     = "pristine-" + basePristine + ext
-		alltools     = "pristine-alltools-" + basePristine + ext
+		baseArchive = archiveBasename(*arch, params.ArchiveVersion(env.Commit))
+		pristine    = "pristine-" + baseArchive + ext
+		alltools    = "pristine-alltools-" + baseArchive + ext
 	)
 	maybeSkipArchive(env)
 	if err := build.WriteArchive(pristine, pristineArchiveFiles); err != nil {
