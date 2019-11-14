@@ -48,7 +48,7 @@ Using conventions, documentation and specifications make it easier to:
 
 To get started, [fork](https://help.github.com/articles/fork-a-repo/) or [duplicate](https://help.github.com/articles/duplicating-a-repository/) the repository. Then edit this file and delete everything above this line.
 
-Then edit the `package.json` and change the `name` and `homepage` fields to match your newly created repository.
+Then execute .pristine/post-install.sh and follow the prompts. 
 
 ### Contributing
 
