@@ -31,25 +31,34 @@ read binary
 
 echo ""
 
+function replaceTextInFile() {
+  # using ~ in place of / to avoid slashes in package names conflicting with sed
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    sed -i  "" -e "s~$1~$2~g" $3
+  else
+    sed -i  -e "s~$1~$2~g" $3
+  fi
+}
+
 defaultGithub="${defaultOrg}/${defaultRepo}"
 github="${orginization}/${repository}"
 
+replaceTextInFile $defaultGithub $github  .circleci/config.yml
+replaceTextInFile $defaultBinary $binary  .circleci/config.yml
+
+replaceTextInFile $defaultGithub $github  internal/build/env.go
+
+replaceTextInFile $defaultGithub $github  build/ci.go
+replaceTextInFile $defaultBinary $binary  build/ci.go
 # using ~ in place of / to avoid slashes in package names conflicting with sed
-sed -i  "" -e "s~${defaultGithub}~${github}~g"  .circleci/config.yml
-sed -i  "" -e "s~${defaultBinary}~${binary}~g"  .circleci/config.yml
 
-sed -i  "" -e "s~${defaultGithub}~${github}~g"  internal/build/env.go
+replaceTextInFile $defaultRepo $repository  build/env.sh
+replaceTextInFile $defaultOrg $orginization  build/env.sh
 
-sed -i  "" -e "s~${defaultGithub}~${github}~g"  build/ci.go
-sed -i  "" -e "s~${defaultBinary}~${binary}~g"  build/ci.go
+replaceTextInFile $defaultBinary $binary  Makefile
 
-sed -i  "" -e "s~${defaultRepo}~${repository}~g"  build/env.sh
-sed -i  "" -e "s~${defaultOrg}~${orginization}~g"  build/env.sh
-
-sed -i  "" -e "s~${defaultBinary}~${binary}~g"  Makefile
-
-sed -i  "" -e "s~${defaultGithub}~${github}~g"  README.md
-sed -i  "" -e "s~${defaultRepo}~${repository}~g"  README.md
+replaceTextInFile $defaultGithub $github  README.md
+replaceTextInFile $defaultRepo $repository  README.md
 
 git mv "cmd/${defaultBinary}" "cmd/${binary}"
 # build/env.sh
